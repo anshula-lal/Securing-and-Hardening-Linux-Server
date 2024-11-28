@@ -1,4 +1,5 @@
 # Securing and Hardening Linux Server
 A Project report on securing and Hardening Linux server
 In an age where cyber threats are ever-evolving, securing and hardening Linux servers has become a critical aspect of IT infrastructure management. This project aims to reinforce the security of Linux servers by implementing a comprehensive set of best practices and advanced techniques. The project's scope includes identifying potential vulnerabilities, configuring firewall rules, enforcing strong authentication mechanisms, and employing system monitoring tools to detect and mitigate threats in real-time.
+
 Furthermore, the project will cover the application of security patches, file integrity monitoring, and the use of intrusion detection systems to provide multiple layers of defences. By adopting a proactive approach to security, the project seeks to minimize the attack surface and ensure the Linux server environment is robust against unauthorized access and malicious activities. The outcome of this project will be a fortified Linux server setup, capable of withstanding a wide array of cyber threats, thereby enhancing the overall security posture of the organization
