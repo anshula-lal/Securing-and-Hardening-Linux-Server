@@ -5,24 +5,43 @@ sudo dnf install openscap openscap-scanner openscap-utils -y
 Run a basic scan:
 
 sudo oscap xccdf eval --profile xccdf_org.redhat.scap_security_guide_profile_toplevel --results-id myscan results.xml system.xml
+
 This command will perform a scan and save the results to results.xml.
 
 View the scan results:
 
-bash
 sudo oscap xccdf export --arf arf.xml results.xml
 
- 
 Locate the SCAP content provided by the scap-security-guide package:
 
 sudo find / -name '*ssg-rhel*.xml'
 
 Identify the relevant SCAP content file, such as ssg-rhel9-ds.xml (the exact name might vary).
+	grep "content_profile" /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_anssi_bp28_enhanced">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_anssi_bp28_high">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_anssi_bp28_intermediary">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_anssi_bp28_minimal">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_ccn_advanced">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_ccn_basic">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_ccn_intermediate">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_cis">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_cis_server_l1">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_cis_workstation_l1">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_cis_workstation_l2">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_cui">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_e8">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_hipaa">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_ism_o">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_ospp">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_pci-dss">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_stig">
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_stig_gui">
+
 
 Run the scan using the identified SCAP content:
 
-sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard --results results.xml /path/to/ssg-rhel9-ds.xml
-	Replace /path/to/ssg-rhel9-ds.xml with the actual path to the SCAP content file.
+sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ccn_advanced --results results.xml /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
 
 Generate a report from the results:
 
@@ -31,28 +50,3 @@ sudo oscap xccdf generate report results.xml > report.html
 View the generated report in a web browser:
 
 firefox report.html
- 
-No profile matching suffix "xccdf_org.ssgproject.content_profile_standard" was found.
-It seems like the profile xccdf_org.ssgproject.content_profile_standard is not available on your system. Let's try listing the available profiles to find a suitable one for your scan:
-
-List available profiles:
-
-sudo oscap info /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml
-
-This command will display the profiles included in the SCAP content file for RHEL 9.
-
-Find a matching profile from the list and use it in the scan command:
-
-sudo oscap xccdf eval --profile <profile_id> --results results.xml /path/to/ssg-rhel9-ds.xml
-
-Replace <profile_id> with the appropriate profile ID from the list.
-
-Generate a report from the results:
-
-sudo oscap xccdf generate report results.xml > report.html
-
-View the generated report in a web browser:
-
-firefox report.html
-
-
